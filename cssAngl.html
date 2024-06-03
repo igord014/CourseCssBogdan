@@ -74,6 +74,9 @@
         background-color: white;
         width: 30%;
       }
+      .clear-all{
+        cursor: pointer;
+      }
     </style>
   </head>
   <body>
@@ -89,7 +92,6 @@
         />
         <button onclick="clearInput()" id="clear">clear</button>
         <button onclick="sendInput()" id="send">send</button>
-
       </div>
       <div class="enterInput">
         <input id="checkbox" type="checkbox" />
@@ -113,8 +115,10 @@
         <button onclick="clearInput()" id="clear">clear</button>
         <button onclick="sendInput()" id="send">send</button>
       </div>
-      <button onclick="clearInput()" id="clear">clear</button>
-     
+      <div class="clear-all">
+        <button onclick="clearInput()" id="clear">clear all</button>
+      </div>
+
       <div>
         <p id="outputField">output</p>
       </div>
