@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Three Containers</title>
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            font-family: Arial, sans-serif;
+        }
+        .container {
+            display: flex;
+            justify-content: space-between;
+            width: 80%;
+        }
+        .box {
+            background-color: #f0f0f0;
+            padding: 20px;
+            margin: 10px;
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            box-sizing: border-box;
+        }
+        .box img {
+            max-width: 100%;
+            height: auto;
+        }
+        .text {
+            flex: 1;
+            margin: 10px 0;
+            text-align: center;
+        }
+        .button {
+            padding: 10px 20px;
+            background-color: #007BFF;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+        .button:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="box">
+            <img src="https://via.placeholder.com/150" alt="Placeholder Image">
+            <div class="text">Свободный текст 1</div>
+            <button class="button">Кнопка 1</button>
+        </div>
+        <div class="box">
+            <img src="https://via.placeholder.com/150" alt="Placeholder Image">
+            <div class="text">Свободный текст 2, который может быть длиннее, чем текст в других контейнерах.Свободный текст 2, который может быть длиннее, чем текст в других контейнерах.Свободный текст 2, который может быть длиннее, чем текст в других контейнерах.Свободный текст 2, который может быть длиннее, чем текст в других контейнерах.Свободный текст 2, который может быть длиннее, чем текст в других контейнерах.Свободный текст 2, который может быть длиннее, чем текст в других контейнерах.</div>
+            <button class="button">Кнопка 2</button>
+        </div>
+        <div class="box">
+            <img src="https://via.placeholder.com/150" alt="Placeholder Image">
+            <div class="text">Свободный текст 3</div>
+            <button class="button">Кнопка 3</button>
+        </div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,148 @@
+<!-- ctrl+F2 rename teg, shift+F12 find where it used, ctrl+G find row,alt+shift+f formating. ctrl+l select row, -->
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Three Containers</title>
+
+    <style>
+      .common {
+        display: flex;
+        flex-direction: column;
+        background-color: rgb(244, 237, 229);
+        padding: 0;
+        margin: 20px;
+        height: 100vh;
+        gap: 5px;
+      }
+      .enterInput {
+        display: flex;
+        flex-direction: row;
+        border: 2px solid black;
+        height: 5%;
+        padding: 10px;
+        margin: 20px;
+        gap: 5px;
+        align-self: start;
+        justify-content: start;
+        width: auto;
+        height: auto;
+      }
+      #outputField {
+        margin-top: 10px;
+        padding: 5px;
+        border: 2px solid #ccc;
+        border-radius: 2px;
+        width: auto;
+        height: 15px;
+        margin: 20px;
+      }
+
+      input:hover {
+        background-color: #0001;
+      }
+      input.focus {
+        background-color: rgb(7, 129, 106);
+      }
+      input:checked {
+        margin: 2px;
+      }
+      #clear {
+        cursor: pointer;
+        color: #000;
+      }
+      #clear:hover {
+        background-color: #6311e7;
+        color: #e39595;
+        font-weight: 700;
+
+        font-size: Light;
+      }
+      #send {
+        cursor: pointer;
+      }
+      #send:hover {
+        background-color: #86e91c;
+        color: #060801;
+        font-weight: 900;
+        font-size: smaller;
+      }
+      .has-content {
+        color: rgb(40, 38, 38);
+        font-weight: 900;
+        background-color: white;
+        width: 30%;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="common">
+      <div class="enterInput">
+        <input id="checkbox" type="checkbox" />
+
+        <input
+          type="text"
+          id="inputField"
+          placeholder=" enter text"
+          style="color: rgb(7, 26, 43)"
+        />
+        <button onclick="clearInput()" id="clear">clear</button>
+        <button onclick="sendInput()" id="send">send</button>
+
+      </div>
+      <div class="enterInput">
+        <input id="checkbox" type="checkbox" />
+        <input
+          type="text"
+          id="inputFieldTwo"
+          placeholder=" enter text"
+          style="color: rgb(7, 26, 43)"
+        />
+        <button onclick="clearInput()" id="clear">clear</button>
+        <button onclick="sendInput()" id="send">send</button>
+      </div>
+      <div class="enterInput">
+        <input id="checkbox" type="checkbox" />
+        <input
+          type="text"
+          id="inputFieldTree"
+          placeholder=" enter text"
+          style="color: rgb(7, 26, 43)"
+        />
+        <button onclick="clearInput()" id="clear">clear</button>
+        <button onclick="sendInput()" id="send">send</button>
+      </div>
+      <button onclick="clearInput()" id="clear">clear</button>
+     
+      <div>
+        <p id="outputField">output</p>
+      </div>
+    </div>
+
+    <script>
+      function clearInput() {
+        document.getElementById("inputField").value = "";
+        document.getElementById("inputFieldTwo").value = "";
+        document.getElementById("inputFieldTree").value = "";
+        updateOutputField("");
+      }
+
+      function sendInput() {
+        const inputFieldValue = document.getElementById("inputField").value;
+        updateOutputField(inputFieldValue);
+      }
+
+      function updateOutputField(value) {
+        const outputField = document.getElementById("outputField");
+        if (value.trim() === "") {
+          outputField.textContent = "output";
+          outputField.classList.remove("has-content");
+        } else {
+          outputField.textContent = value;
+          outputField.classList.add("has-content");
+        }
+      }
+    </script>
+  </body>
+</html>
