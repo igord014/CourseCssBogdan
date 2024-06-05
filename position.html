@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="ru">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Документ</title>
+    <style>
+      * {
+        font-family: Arial, Helvetica, sans-serif;
+        font-size: 12px; /* Изменил размер шрифта на 12px */
+      }
+      body {
+        margin: 0px;
+        display: flex;
+        position: relative;
+      }
+      .cont {
+        position: relative;
+        display: flex;
+        margin: 10px;
+        width: 100%;
+        background-color: #9e9ece;
+        align-items: center;
+        justify-content: start;
+        margin-left: 0px;
+        margin-top: 5px;
+        flex-direction: column;
+      }
+
+      .parent {
+        display: flex;
+        background-color: #8ff38f; /* Изменил цвет фона на светло-бежевый */
+        height: 200vh;
+        margin-left: 0px;
+        align-items: center;
+        justify-content: center;
+        width: 100vh;
+      }
+
+      .leftColummn {
+        height: 300px;
+        margin: 5px;
+        position: sticky;
+        height: 300px;
+        width: 60px;
+        top: 0px;
+        background-color: #7fffd4; /* Изменил цвет фона на аквамарин */
+      }
+      .sticky {
+        display: flex;
+        flex-direction: row;
+        position: sticky;
+        top: 0px;
+        justify-content: center;
+        align-items: center;
+        width: 100%;
+      }
+      .child-sticky {
+        background-color: #7fffd4;
+        margin: 0px;
+        
+        height: 50px;
+        
+      }
+
+      .child-two {
+        background-color: #9e9ece; /* Изменил цвет фона на синий */
+      }
+
+      .child-three {
+        background-color: #e8b2b2; /* Изменил цвет фона на коричневый */
+      }
+    </style>
+  </head>
+  <body>
+    <div class="leftColummn">Дочерний элемент 1</div>
+    <div class="cont">
+      <div class="sticky">
+        <h2 class="child-sticky">Дочерний элемент 3</h2>
+        <h2 class="child-sticky">Дочерний элемент 3</h2>
+        <h2 class="child-sticky">Дочерний элемент 3</h2>
+        <h2 class="child-sticky">Дочерний элемент 3</h2>
+      </div>
+
+      <p class="child-two">Дочерний элемент 2</p>
+      <p class="child-two">Дочерний элемент 2</p>
+      <p class="child-two">Дочерний элемент 2</p>
+      <p class="child-two">Дочерний элемент 2</p>
+      <p class="child-two">Дочерний элемент 2</p>
+      <p class="child-two">Дочерний элемент 2</p>
+      <p class="child-two">Дочерний элемент 2</p>
+      <p class="child-two">Дочерний элемент 2</p>
+      <p class="child-two">Дочерний элемент 2</p>
+      <p class="child-two">Дочерний элемент 2</p>
+      <p class="child-two">Дочерний элемент 2</p>
+      <p class="child-two">Дочерний элемент 2</p>
+      <p class="child-two">Дочерний элемент 2</p>
+      <p class="child-two">Дочерний элемент 2</p>
+      <p class="child-two">Дочерний элемент 2</p>
+      <p class="child-two">Дочерний элемент 2</p>
+      <p class="child-two">Дочерний элемент 2</p>
+      <p class="child-two">Дочерний элемент 2</p>
+      <p class="child-two">Дочерний элемент 2</p>
+      <p class="child-two">Дочерний элемент 2</p>
+      <p class="child-two">Дочерний элемент 2</p>
+      <p class="child-two">Дочерний элемент 2</p>
+      <p class="child-two">Дочерний элемент 2</p>
+      <p class="child-two">Дочерний элемент 2</p>
+      <p class="child-two">Дочерний элемент 2</p>
+      <p class="child-two">Дочерний элемент 2</p>
+      <p class="child-two">Дочерний элемент 2</p>
+      <p class="child-two">Дочерний элемент 2</p>
+      <h2 class="child-three">Дочерний элемент 3</h2>
+      <h2 class="child-three">Дочерний элемент 3</h2>
+      <h2 class="child-three">Дочерний элемент 3</h2>
+      <h2 class="child-three">Дочерний элемент 3</h2>
+      <h2 class="child-three">Дочерний элемент 3</h2>
+
+      <p class="child-two">Дочерний элемент 2</p>
+      <p class="child-two">Дочерний элемент 2</p>
+      <h2 class="child-three">Дочерний элемент 3</h2>
+    </div>
+  </body>
+</html>
