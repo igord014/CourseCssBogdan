@@ -101,6 +101,18 @@
         display: none;
         font-size: 1em;
       }
+      #emptyAlert {
+        position: fixed;
+        top: 30%;
+        left: 10%;
+color: white;
+        background-color: #7e0f0d;
+        padding: 20px;
+        border-radius: 8px;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        display: none;
+        font-size: 1em;
+      }
     </style>
   </head>
   <body>
@@ -123,6 +135,7 @@
       <div id="outputField" style="padding-left: 10px">Output</div>
     </div>
     <span id="customAlert" class="custom-alert">Текст введён корректно</span>
+    <span id="emptyAlert" class="empty-alert">В текстовое поле ничего не введено</span>
 
     <!-- Скрипт для обработки ввода -->
     <script>
@@ -135,9 +148,24 @@
         const inputValue = inputField.value.trim();
 
         // Если введено значение, отличное от пустого
+        if (inputValue == "") {
+          // Отображаем это значение в поле вывода
+          var emptyAlert = document.getElementById("emptyAlert");
+          emptyAlert.style.display = "inline-block";
+  
+          setTimeout(function () {
+            emptyAlert.style.display = "none";
+          }, 3000);
+        }
         if (inputValue !== "") {
           // Отображаем это значение в поле вывода
           outputField.textContent = inputValue;
+          var customAlert = document.getElementById("customAlert");
+          customAlert.style.display = "inline-block";
+  
+          setTimeout(function () {
+            customAlert.style.display = "none";
+          }, 3000);
         } else {
           // Если введено пустое значение, устанавливаем placeholder и добавляем класс "error"
           inputField.value = "Вы не ввели текст";
@@ -149,13 +177,11 @@
             inputField.classList.remove("error");
           }, 3000);
         }
-        var customAlert = document.getElementById("customAlert");
-        customAlert.style.display = "inline-block";
 
-        setTimeout(function () {
-          customAlert.style.display = "none";
-        }, 3000);
+        
+       
       }
+      //----------------------------------
 
       function clearInput() {
         document.getElementById("inputField").value = "";
