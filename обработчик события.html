@@ -1,0 +1,109 @@
+<!-- События для элементов форм
+change: Срабатывает, когда значение элемента изменяется и элемент теряет фокус.
+focus: Срабатывает, когда элемент получает фокус.
+blur: Срабатывает, когда элемент теряет фокус.
+submit: Срабатывает, когда форма отправляется.
+reset: Срабатывает, когда форма сбрасывается.
+keydown: Срабатывает, когда нажата клавиша на клавиатуре.
+keypress: Срабатывает, когда клавиша нажата и удерживается.
+keyup: Срабатывает, когда клавиша отпущена.
+select: Срабатывает, когда выделен текст в элементе <input> или <textarea>.
+События для мыши
+click: Срабатывает при щелчке на элементе.
+dblclick: Срабатывает при двойном щелчке на элементе.
+mousedown: Срабатывает при нажатии кнопки мыши на элементе.
+mouseup: Срабатывает при отпускании кнопки мыши на элементе.
+mouseover: Срабатывает, когда указатель мыши перемещается на элемент.
+mouseout: Срабатывает, когда указатель мыши перемещается с элемента.
+mousemove: Срабатывает, когда указатель мыши перемещается внутри элемента.
+mouseenter: Срабатывает, когда указатель мыши перемещается на элемент (не всплывающее).
+mouseleave: Срабатывает, когда указатель мыши перемещается с элемента (не всплывающее).
+События для окна
+load: Срабатывает, когда страница полностью загружена.
+resize: Срабатывает, когда размер окна изменяется.
+scroll: Срабатывает, когда страница или элемент прокручивается.
+unload: Срабатывает, когда страница покидается (например, при переходе на другую страницу).
+beforeunload: Срабатывает перед выгрузкой страницы.
+События для сенсорных экранов
+touchstart: Срабатывает, когда палец касается поверхности.
+touchend: Срабатывает, когда палец поднимается с поверхности.
+touchmove: Срабатывает, когда палец движется по поверхности.
+touchcancel: Срабатывает, когда сенсорное взаимодействие прерывается.
+События для клавиатуры
+keydown: Срабатывает при нажатии клавиши.
+keypress: Срабатывает, когда клавиша нажата и удерживается.
+keyup: Срабатывает при отпускании клавиши. -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Event Handlers Example</title>
+  <style>
+    .box {
+      width: 200px;
+      height: 100px;
+      border: 1px solid black;
+      margin: 20px;
+      text-align: center;
+      line-height: 100px;
+    }
+  </style>
+</head>
+<body>
+
+<div class="box" id="myBox">Click or hover me!</div>
+<input type="text" id="myInput" placeholder="Type something">
+
+<script>
+  let box = document.getElementById("myBox");
+  let input = document.getElementById("myInput");
+
+  // Обработчик события click
+ // box.addEventListener("click", function() {
+ //  alert("Box  clicked!");
+ // });
+
+  // Обработчик события dblclick
+  box.addEventListener("dblclick", function() {
+    alert("Box double-clicked!");
+  });
+
+  // Обработчик события mouseover
+  box.addEventListener("mouseover", function() {
+    box.style.backgroundColor = "yellow";
+  });
+
+  // Обработчик события mouseout
+  box.addEventListener("mouseout", function() {
+    box.style.backgroundColor = "";
+  });
+
+  // Обработчик события focus
+  input.addEventListener("focus", function() {
+    input.style.border = "5px solid black";
+  });
+
+  // Обработчик события blur
+  input.addEventListener("blur", function() {
+    input.style.border = "20px solid black";
+  });
+
+  // Обработчик события input
+  input.addEventListener("input", function() {
+    console.log("Input value: " + input.value);
+  });
+
+  // Обработчик события keydown
+  input.addEventListener("keydown", function(event) {
+    console.log("Key pressed: " + event.key);
+  });
+
+  // Обработчик события keyup
+  input.addEventListener("keyup", function(event) {
+    console.log("Key released: " + event.key);
+  });
+</script>
+
+</body>
+</html>

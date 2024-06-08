@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Пример float</title>
+    <style>
+        .container {
+            width: 600px;
+            margin: 0 auto;
+            border: 1px solid #ccc;
+            padding: 10px;
+        }
+
+        .left {
+            float: left;
+            width: 200px;
+            margin-right: 10px;
+            background-color: #f0f0f0;
+            padding: 10px;
+        }
+
+        .right {
+            overflow: hidden; /* Это поможет контейнеру следовать за элементами с float */
+        }
+
+        img {
+            max-width: 100%;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="left">
+            <img src="ID.png" alt="Пример изображения">
+        </div>
+        <div class="right">
+            <p>Это пример текста, который обтекает изображение слева. Вы можете заметить, что текст располагается справа от изображения и продолжает заполнять пространство под ним.</p>
+            <p>Использование float может быть полезным для создания обтекания изображений текстом, но его нужно использовать с осторожностью, так как может вызвать проблемы с макетом, если не управлять очисткой (clear) должным образом.</p>
+        </div>
+    </div>
+</body>
+</html>

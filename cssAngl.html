@@ -7,7 +7,7 @@
     <title>Three Containers</title>
 
     <style>
-      *{
+      * {
         box-sizing: border-box;
         overflow: auto;
       }
@@ -36,7 +36,7 @@
       #outputField {
         display: flex;
         justify-content: start;
-        align-items:center;
+        align-items: center;
         margin-top: 10px;
         padding: 5px;
         border: 2px solid #ccc;
@@ -82,7 +82,7 @@
         background-color: white;
         width: 30%;
       }
-      .clear-all{
+      .clear-all {
         cursor: pointer;
       }
     </style>
@@ -101,28 +101,7 @@
         <button onclick="clearInput()" id="clear">clear</button>
         <button onclick="sendInput()" id="send">send</button>
       </div>
-      <div class="enterInput">
-        <input id="checkbox" type="checkbox" />
-        <input
-          type="text"
-          id="inputFieldTwo"
-          placeholder=" enter text"
-          style="color: rgb(7, 26, 43)"
-        />
-        <button onclick="clearInput()" id="clear">clear</button>
-        <button onclick="sendInput()" id="send">send</button>
-      </div>
-      <div class="enterInput">
-        <input id="checkbox" type="checkbox" />
-        <input
-          type="text"
-          id="inputFieldTree"
-          placeholder=" enter text"
-          style="color: rgb(7, 26, 43)"
-        />
-        <button onclick="clearInput()" id="clear">clear</button>
-        <button onclick="sendInput()" id="send">send</button>
-      </div>
+
       <div class="clear-all">
         <button onclick="clearInput()" id="clear">clear all</button>
       </div>
@@ -132,16 +111,7 @@
       </div>
     </div>
 
-    
-
     <script>
-      function clearInput() {
-        document.getElementById("inputField").value = "";
-        document.getElementById("inputFieldTwo").value = "";
-        document.getElementById("inputFieldTree").value = "";
-        updateOutputField("");
-      }
-
       function sendInput() {
         const inputFieldValue = document.getElementById("inputField").value;
         updateOutputField(inputFieldValue);
@@ -156,6 +126,13 @@
           outputField.textContent = value;
           outputField.classList.add("has-content");
         }
+      }
+
+      function clearInput() {
+        document.getElementById("inputField").value = "";
+        document.getElementById("inputFieldTwo").value = "";
+        document.getElementById("inputFieldTree").value = "";
+        updateOutputField("");
       }
     </script>
   </body>
