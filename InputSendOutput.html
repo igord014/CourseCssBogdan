@@ -81,12 +81,13 @@
         top: 50%;
         left: 50%;
         transform: translate(-50%, -50%);
-        background-color: #ffcccb;
+        background-color: #0aa731;
         padding: 20px;
         border-radius: 8px;
         box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
         display: none;
         font-size: 1em;
+        color: white;
       }
       #emptyAlert {
         position: fixed;
@@ -130,8 +131,12 @@
       <div id="outputField" style="padding-left: 10px">Output</div>
     </div>
     <span id="customAlert" class="custom-alert">Текст введён корректно</span>
-    <span id="emptyAlert" class="empty-alert">В текстовое поле ничего не введено</span>
-    <span id="tooLongAlert" class="too-long-alert">В поле ввода введено больше 5 символов</span>
+    <span id="emptyAlert" class="empty-alert"
+      >В текстовое поле ничего не введено</span
+    >
+    <span id="tooLongAlert" class="too-long-alert"
+      >В поле ввода введено больше 5 символов</span
+    >
 
     <script>
       const inputField = document.getElementById("inputField");
