@@ -40,7 +40,6 @@
         margin: 0;
         height: 100vh;
         background-color: #f0f0f0;
-
         position: relative;
       }
       .common {
@@ -51,17 +50,14 @@
         padding: 30px;
         gap: 30px;
       }
-
       #inputField {
         display: flex;
         width: 200px;
         border: 2px solid black;
         border-radius: 5px;
       }
-
       #outputField {
         background-color: aliceblue;
-
         width: auto;
         border: 2px solid black;
         border-radius: 5px;
@@ -77,7 +73,6 @@
       #send:hover {
         background-color: aliceblue;
       }
-
       .error {
         color: red;
         font-weight: 900;
@@ -93,7 +88,6 @@
         position: fixed;
         top: 50%;
         left: 50%;
-
         background-color: #ffcccb;
         padding: 20px;
         border-radius: 8px;
@@ -105,8 +99,20 @@
         position: fixed;
         top: 30%;
         left: 10%;
-color: white;
+        color: white;
         background-color: #7e0f0d;
+        padding: 20px;
+        border-radius: 8px;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        display: none;
+        font-size: 1em;
+      }
+      #tooLongAlert {
+        position: fixed;
+        top: 50%;
+        left: 50%;
+        color: white;
+        background-color: #ff5733;
         padding: 20px;
         border-radius: 8px;
         box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
@@ -126,6 +132,7 @@ color: white;
           id="inputField"
           style="padding-left: 10px"
           placeholder="введите текст"
+          maxlength="5"
         />
         <!-- Кнопка для отправки введенного текста -->
         <button onclick="sendInput()" id="send">Send</button>
@@ -136,65 +143,52 @@ color: white;
     </div>
     <span id="customAlert" class="custom-alert">Текст введён корректно</span>
     <span id="emptyAlert" class="empty-alert">В текстовое поле ничего не введено</span>
+    <span id="tooLongAlert" class="too-long-alert">В поле ввода введено больше 5 символов</span>
 
     <!-- Скрипт для обработки ввода -->
     <script>
+      const inputField = document.getElementById("inputField");
+      const outputField = document.getElementById("outputField");
+
       function sendInput() {
-        // Получаем элемент поля ввода по его id
-        const inputField = document.getElementById("inputField");
-        // Получаем элемент поля вывода по его id
-        const outputField = document.getElementById("outputField");
         // Получаем значение введенного текста и убираем пробелы с обоих концов
         const inputValue = inputField.value.trim();
 
         // Если введено значение, отличное от пустого
-        if (inputValue == "") {
-          // Отображаем это значение в поле вывода
+        if (inputValue === "") {
           var emptyAlert = document.getElementById("emptyAlert");
           emptyAlert.style.display = "inline-block";
-  
+
           setTimeout(function () {
             emptyAlert.style.display = "none";
           }, 3000);
-        }
-        if (inputValue !== "") {
+        } else {
           // Отображаем это значение в поле вывода
           outputField.textContent = inputValue;
           var customAlert = document.getElementById("customAlert");
           customAlert.style.display = "inline-block";
-  
+
           setTimeout(function () {
             customAlert.style.display = "none";
           }, 3000);
-        } else {
-          // Если введено пустое значение, устанавливаем placeholder и добавляем класс "error"
-          inputField.value = "Вы не ввели текст";
-          inputField.classList.add("error");
-
-          // Через 2 секунды убираем placeholder и класс "error"
-          setTimeout(() => {
-            inputField.value = "";
-            inputField.classList.remove("error");
-          }, 3000);
         }
-
-        
-       
       }
-      //----------------------------------
 
       function clearInput() {
-        document.getElementById("inputField").value = "";
+        inputField.value = "Текст стерт";
         outputField.textContent = "Текст стерт";
+
         outputField.classList.add("errorOutput");
+        inputField.classList.add("errorOutput");
+
         setTimeout(() => {
+          inputField.value = "";
+          inputField.classList.remove("errorOutput");
           outputField.textContent = "Output";
           outputField.classList.remove("errorOutput");
         }, 3000);
       }
-      // inputField.addEventListener("mouseover", function() {
-      // inputField.style.backgroundColor = "yellow";
-      // });
+
       inputField.addEventListener("mouseout", function () {
         inputField.style.backgroundColor = "";
       });
@@ -202,7 +196,19 @@ color: white;
         inputField.style.border = "5px solid green";
       });
       inputField.addEventListener("blur", function () {
-        inputField.style.border = "1px solid black";
+        inputField.style.border = "2px solid black";
+      });
+
+      inputField.addEventListener("input", function () {
+        if (inputField.value.length > 5) {
+          inputField.value = inputField.value.slice(0, 5);
+          var tooLongAlert = document.getElementById("tooLongAlert");
+          tooLongAlert.style.display = "inline-block";
+
+          setTimeout(function () {
+            tooLongAlert.style.display = "none";
+          }, 3000);
+        }
       });
     </script>
   </body>
