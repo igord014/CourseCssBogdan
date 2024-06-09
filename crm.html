@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Customer List</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif; /* Стиль для шрифта */
+      }
+      form {
+        margin-bottom: 20px; /* Нижний отступ для формы */
+      }
+      input {
+        margin: 5px; /* Отступ для полей ввода */
+      }
+      ul {
+        list-style-type: none; /* Убираем маркеры списка */
+        padding: 0; /* Убираем отступы */
+      }
+      li {
+        margin: 10px 0; /* Отступы для элементов списка */
+        padding: 10px; /* Внутренние отступы для элементов списка */
+        border: 1px solid #ddd; /* Граница для элементов списка */
+      }
+      button {
+        margin: 5px; /* Отступ для кнопок */
+      }
+      .gpt {
+        text-decoration: none; /* Убираем подчеркивание ссылки */
+        color: black; /* Наследуем цвет текста */
+        transition: color 0.7s; /* Добавляем плавное изменение цвета */
+      }
+      .gpt:hover {
+        color: rgb(149, 6, 32);
+      }
+      div {
+        background-color: rgb(190, 236, 236);
+        width: 70px; /* Ширина контейнера, замените на свою */
+        height: 30px; /* Высота контейнера, замените на свою */
+        border: 1px solid black; /* Пример границы контейнера */
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column; /* Добавляем направление столбца для выравнивания по вертикали */
+        border-radius: 5px;
+      }
+    </style>
+    <!-- Подключаем Firebase -->
+    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-database.js"></script>
+    <script>
+      // Шаг 1: Конфигурация Firebase
+      var firebaseConfig = {
+        apiKey: "YOUR_API_KEY",
+        authDomain: "YOUR_PROJECT_ID.firebaseapp.com",
+        databaseURL: "https://YOUR_PROJECT_ID.firebaseio.com",
+        projectId: "YOUR_PROJECT_ID",
+        storageBucket: "YOUR_PROJECT_ID.appspot.com",
+        messagingSenderId: "YOUR_SENDER_ID",
+        appId: "YOUR_APP_ID",
+      };
+      // Инициализация Firebase
+      firebase.initializeApp(firebaseConfig);
+      var database = firebase.database();
+    </script>
+  </head>
+  <body>
+    <div>
+      <a
+        href="https://chatgpt.com/share/424357bd-470b-42ca-9eba-7788b2cb90b3"
+        class="gpt"
+        target="_blank"
+        >Link gpt</a
+      >
+    </div>
+
+    <h1>Customer List</h1>
+    <form id="customerForm">
+      <label for="name">Name:</label>
+      <input type="text" id="name" name="name" required /><br /><br />
+      <label for="email">Email:</label>
+      <input type="email" id="email" name="email" required /><br /><br />
+      <label for="phone">Phone:</label>
+      <input type="text" id="phone" name="phone" required /><br /><br />
+      <button type="submit">Add Customer</button>
+      <!-- Кнопка для добавления кастомера -->
+      <button type="button" id="saveButton" style="display: none">Save</button>
+      <!-- Кнопка для сохранения редактирования -->
+    </form>
+    <h2>Customer List</h2>
+    <ul id="customerList"></ul>
+    <!-- Список для отображения кастомеров -->
+
+    <script>
+      // Шаг 2: Обработчик формы для добавления нового кастомера
+      document
+        .getElementById("customerForm")
+        .addEventListener("submit", function (e) {
+          e.preventDefault(); // Предотвращаем стандартное поведение отправки формы
+
+          // Шаг 3: Получаем значения полей формы
+          const name = document.getElementById("name").value;
+          const email = document.getElementById("email").value;
+          const phone = document.getElementById("phone").value;
+
+          // Шаг 4: Создаем объект кастомера и сохраняем его в Firebase
+          const newCustomerRef = database.ref("customers").push();
+          newCustomerRef.set(
+            {
+              name: name,
+              email: email,
+              phone: phone,
+            },
+            (error) => {
+              if (error) {
+                console.error("Error adding customer: ", error);
+              } else {
+                console.log("Customer added successfully");
+                // Шаг 5: Сбрасываем форму и перезагружаем список кастомеров
+                document.getElementById("customerForm").reset();
+                loadCustomers();
+              }
+            }
+          );
+        });
+
+      // Шаг 6: Навешиваем обработчик на кнопку "Save"
+      document
+        .getElementById("saveButton")
+        .addEventListener("click", function () {
+          const index = this.getAttribute("data-index");
+          saveCustomer(index);
+        });
+
+      // Шаг 7: Функция для загрузки и отображения списка кастомеров
+      function loadCustomers() {
+        const customerList = document.getElementById("customerList");
+        customerList.innerHTML = ""; // Очищаем список
+
+        database.ref("customers").once("value", function (snapshot) {
+          snapshot.forEach(function (childSnapshot) {
+            const customer = childSnapshot.val();
+            const li = document.createElement("li");
+            const span = document.createElement("span");
+            span.textContent = `${customer.name} - ${customer.email} - ${customer.phone}`;
+            span.id = `customer-${childSnapshot.key}`;
+            li.appendChild(span);
+
+            // Шаг 8: Создаем и навешиваем кнопки "Edit" и "Delete" для каждого кастомера
+            const editButton = document.createElement("button");
+            editButton.textContent = "Edit";
+            editButton.onclick = () =>
+              editCustomer(childSnapshot.key, customer);
+            li.appendChild(editButton);
+
+            const deleteButton = document.createElement("button");
+            deleteButton.textContent = "Delete";
+            deleteButton.onclick = () => deleteCustomer(childSnapshot.key);
+            li.appendChild(deleteButton);
+
+            customerList.appendChild(li);
+          });
+        });
+      }
+
+      // Шаг 9: Функция для редактирования кастомера
+      function editCustomer(key, customer) {
+        document.getElementById("name").value = customer.name;
+        document.getElementById("email").value = customer.email;
+        document.getElementById("phone").value = customer.phone;
+
+        document.getElementById("saveButton").style.display = "inline";
+        document.getElementById("saveButton").setAttribute("data-index", key);
+      }
+
+      // Шаг 10: Функция для сохранения изменений редактируемого кастомера
+      function saveCustomer(key) {
+        const name = document.getElementById("name").value;
+        const email = document.getElementById("email").value;
+        const phone = document.getElementById("phone").value;
+
+        database.ref("customers/" + key).update(
+          {
+            name: name,
+            email: email,
+            phone: phone,
+          },
+          (error) => {
+            if (error) {
+              console.error("Error saving customer: ", error);
+            } else {
+              console.log("Customer saved successfully");
+              document.getElementById("customerForm").reset();
+              document.getElementById("saveButton").style.display = "none";
+              loadCustomers();
+            }
+          }
+        );
+      }
+
+      // Шаг 11: Функция для удаления кастомера
+      function deleteCustomer(key) {
+        database.ref("customers/" + key).remove((error) => {
+          if (error) {
+            console.error("Error deleting customer: ", error);
+          } else {
+            console.log("Customer deleted successfully");
+            loadCustomers();
+          }
+        });
+      }
+
+      // Шаг 12: Загружаем список кастомеров при загрузке страницы
+      window.onload = loadCustomers;
+    </script>
+  </body>
+</html>
